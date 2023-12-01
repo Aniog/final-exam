@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="使用XML布局文件控制UI界面"
-        android:textColor="#ff0000"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"/>
+        android:id="@+id/textView_view_hello_world"
+        android:layout_width="212dp"
+        android:layout_height="144dp"
+        android:text="@string/textview1" />
 </RelativeLayout>
