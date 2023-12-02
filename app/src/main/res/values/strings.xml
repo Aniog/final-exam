@@ -5,4 +5,6 @@
     <string name="hello">hello</string>
     <string name="JNU">JNU</string>
     <string name="change_text">交换文本</string>
+    <string name="string_item_price">item price</string>
+    <string name="string_item_name">item name</string>
 </resources>
