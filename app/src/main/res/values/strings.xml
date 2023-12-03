@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">MyApp</string>
-    <string name="hello_android">你好Android</string>
-    <string name="textview">TextView</string>
-    <string name="todo">TODO</string>
-    <string name="text_book">text_description</string>
-    <string name="string_item_name">item name</string>
-    <string name="string_item_price">item price\n</string>
+    <string name="app_name">我的第一个应用</string>
+    <string name="hello_world">Hello world</string>
+    <string name="hello_android">你好, Android</string>
+    <string name="hello">hello</string>
+    <string name="JNU">JNU</string>
+    <string name="change_text">交换文本</string>
+    <string name="string_book">书本名字:</string>
     <string name="string_ok">ok</string>
-
 </resources>
