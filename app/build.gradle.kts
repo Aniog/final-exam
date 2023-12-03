@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "cn.edu.jnu.st2021101996"
+    namespace = "com.jnu.student"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "cn.edu.jnu.st2021101996"
-        minSdk = 21
+        applicationId = "com.jnu.student"
+        minSdk = 24
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -39,4 +39,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //添加腾讯地图依赖
+    implementation ("com.tencent.map:tencent-map-vector-sdk:4.3.4")
 }

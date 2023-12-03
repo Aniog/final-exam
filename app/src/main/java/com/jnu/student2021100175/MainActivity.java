@@ -1,6 +1,4 @@
-package cn.edu.jnu.student2021100175;
-
-import android.os.Bundle;
+package com.jnu.student2021100175;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,37 +8,40 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Bundle;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jnu.student.R;
+import com.jnu.student2021100175.Fragment.BaiduMapFragment;
+import com.jnu.student2021100175.Fragment.BookListFragment;
+import com.jnu.student2021100175.Fragment.WebViewFragment;
+import com.jnu.student2021100175.data.Book;
 
-import cn.edu.jnu.st2021101996.R;
-
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private final String[] titles = {"图书", "地图", "新闻"};
-
-    protected  void onCreate(Bundle savedInstanceState){
+    private final String[] tabHeaderStrings = {"图书", "地图", "新闻"};
+    //BooksAdapter booksAdapter;
+    ArrayList<Book> books;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //这是用布局实现
         setContentView(R.layout.activity_main);
-
-        // 获取ViewPager2和TabLayout的实例
         ViewPager2 viewPager = findViewById(R.id.view_pager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-
-        // 创建适配器
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),getLifecycle());
         viewPager.setAdapter(fragmentAdapter);
+        new TabLayoutMediator(tabLayout,viewPager,
+                ((tab, position) -> tab.setText(tabHeaderStrings[position]))).attach();
 
-        // 将TabLayout和ViewPager2进行关联
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(titles[position])
-        ).attach();
 
     }
 
-    // 适配器内部类,用于管理Fragment
-    private static class FragmentAdapter extends FragmentStateAdapter {
+    public static class FragmentAdapter extends FragmentStateAdapter {
         private static final int NUM_TABS = 3;
+
         public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
         }
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new BookListFragment();
                 case 1:
-                    return new MapViewFragment();
+                    return new BaiduMapFragment();
                 case 2:
                     return new WebViewFragment();
                 default:
@@ -66,5 +67,4 @@ public class MainActivity extends AppCompatActivity {
             return NUM_TABS;
         }
     }
-
 }

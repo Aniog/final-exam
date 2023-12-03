@@ -1,4 +1,4 @@
-package cn.edu.jnu.student2021100175;
+package com.jnu.student2021100175;
 
 import org.junit.Test;
 
