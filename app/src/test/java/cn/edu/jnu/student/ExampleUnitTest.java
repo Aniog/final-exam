@@ -1,4 +1,4 @@
-package com.jnu.student;
+package cn.edu.jnu.student;
 
 import org.junit.Test;
 
