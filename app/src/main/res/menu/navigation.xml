@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_rengwu"
+        android:icon="@drawable/tasks"
+        android:title="@string/rengwu" />
+
+    <item
+        android:id="@+id/navigation_jiangli"
+        android:icon="@drawable/reward"
+        android:title="@string/jiangli" />
+    <item
+        android:id="@+id/navigation_tongji"
+        android:icon="@drawable/home"
+        android:title="@string/tongji" />
+    <item
+        android:id="@+id/navigation_wo"
+        android:icon="@drawable/home"
+        android:title="@string/wo" />
+
+</menu>

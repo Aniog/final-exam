@@ -1,4 +1,4 @@
-package com.jnu.student2021100175;
+package com.jnu.student;
 
 import android.content.Context;
 

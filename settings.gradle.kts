@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MyFirstApplication"
+rootProject.name = "PlayTasks"
 include(":app")

@@ -1,12 +1,9 @@
 <resources>
-    <string name="app_name">我的第一个应用</string>
-    <string name="hello_world">Hello world</string>
-    <string name="hello_android">你好, Android</string>
-    <string name="hello">hello</string>
-    <string name="JNU">JNU</string>
-    <string name="change_text">交换文本</string>
-    <string name="string_book">书本名字:</string>
-    <string name="string_ok">ok</string>
+    <string name="app_name">Playtask</string>
+    <string name="rengwu">任务</string>
+    <string name="jiangli">奖励</string>
+    <string name="tongji">统计</string>
+    <string name="wo">我</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">你好，朋友</string>
 </resources>
