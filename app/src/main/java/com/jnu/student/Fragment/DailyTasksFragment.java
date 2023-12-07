@@ -35,7 +35,7 @@ public class DailyTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_daily_tasks, container, false);
+        View root = inflater.inflate(R.layout.daily_tasks, container, false);
         return root;
     }
 }

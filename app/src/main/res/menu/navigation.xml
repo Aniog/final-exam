@@ -3,20 +3,20 @@
 
     <item
         android:id="@+id/navigation_rengwu"
-        android:icon="@drawable/tasks"
+        android:icon="@drawable/rengwu"
         android:title="@string/rengwu" />
 
     <item
         android:id="@+id/navigation_jiangli"
-        android:icon="@drawable/reward"
+        android:icon="@drawable/jiangli"
         android:title="@string/jiangli" />
     <item
         android:id="@+id/navigation_tongji"
-        android:icon="@drawable/home"
+        android:icon="@drawable/tongji"
         android:title="@string/tongji" />
     <item
         android:id="@+id/navigation_wo"
-        android:icon="@drawable/home"
+        android:icon="@drawable/wo"
         android:title="@string/wo" />
 
 </menu>

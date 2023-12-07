@@ -35,15 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             if (item.getItemId() == R.id.navigation_jiangli) {
-                // 用户点击了“首页”，这里可以添加对应逻辑
+                // 用户点击了“奖励”，这里可以添加对应逻辑
                 return true;
             }
             if (item.getItemId() == R.id.navigation_tongji) {
-                // 用户点击了“奖励”，加载DailyTasksFragment
                 return true;
             }
             if (item.getItemId() == R.id.navigation_wo) {
-                // 用户点击了“奖励”，加载DailyTasksFragment
+
                 return true;
             }
             return false;

@@ -40,7 +40,7 @@ public class ButtonTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_button_tasks, container, false);
+        View root = inflater.inflate(R.layout.button_tasks, container, false);
         ViewPager2 viewPager = root.findViewById(R.id.button_view_pager);
         TabLayout tabLayout = root.findViewById(R.id.tab_layout);
         // 创建适配器
