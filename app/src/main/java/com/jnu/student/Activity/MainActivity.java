@@ -4,11 +4,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jnu.student.Fragment.ButtonTasksFragment;
-import com.jnu.student.Fragment.DailyTasksFragment;
 import com.jnu.student.R;
 
 public class MainActivity extends AppCompatActivity {
