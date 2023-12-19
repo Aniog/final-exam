@@ -12,10 +12,10 @@ import com.jnu.student.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GeneralTasksFragment#newInstance} factory method to
+ * Use the {@link fubengTasksFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GeneralTasksFragment extends Fragment {
+public class fubengTasksFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class GeneralTasksFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public GeneralTasksFragment() {
+    public fubengTasksFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class GeneralTasksFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GeneralTasksFragment.
+     * @return A new instance of fragment DungeonTasksFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GeneralTasksFragment newInstance(String param1, String param2) {
-        GeneralTasksFragment fragment = new GeneralTasksFragment();
+    public static fubengTasksFragment newInstance(String param1, String param2) {
+        fubengTasksFragment fragment = new fubengTasksFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class GeneralTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.normal_tasks, container, false);
+        return inflater.inflate(R.layout.fubeng_tasks, container, false);
     }
 }

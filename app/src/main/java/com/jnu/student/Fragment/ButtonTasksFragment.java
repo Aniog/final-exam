@@ -65,13 +65,13 @@ public class ButtonTasksFragment extends Fragment {
             // 根据位置返回对应的Fragment实例
             switch (position) {
                 case 0:
-                    return new DailyTasksFragment();
+                    return new meiriTasksFragment();
                 case 1:
-                    return new WeeklyTasksFragment();
+                    return new meizhouTasksFragment();
                 case 2:
-                    return new GeneralTasksFragment();
+                    return new putongTasksFragment();
                 case 3:
-                    return new DungeonTasksFragment();
+                    return new fubengTasksFragment();
                 default:
                     return null;
             }

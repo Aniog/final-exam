@@ -12,10 +12,10 @@ import com.jnu.student.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DungeonTasksFragment#newInstance} factory method to
+ * Use the {@link putongTasksFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DungeonTasksFragment extends Fragment {
+public class putongTasksFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class DungeonTasksFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DungeonTasksFragment() {
+    public putongTasksFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class DungeonTasksFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DungeonTasksFragment.
+     * @return A new instance of fragment GeneralTasksFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DungeonTasksFragment newInstance(String param1, String param2) {
-        DungeonTasksFragment fragment = new DungeonTasksFragment();
+    public static putongTasksFragment newInstance(String param1, String param2) {
+        putongTasksFragment fragment = new putongTasksFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class DungeonTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.instance_tasks, container, false);
+        return inflater.inflate(R.layout.putong_tasks, container, false);
     }
 }

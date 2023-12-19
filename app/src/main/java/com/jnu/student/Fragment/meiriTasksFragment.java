@@ -10,16 +10,23 @@ import android.view.ViewGroup;
 
 import com.jnu.student.R;
 
-public class DailyTasksFragment extends Fragment {
+public class meiriTasksFragment extends Fragment {
 
 
-    public DailyTasksFragment() {
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private String mParam1;
+    private String mParam2;
+
+    public meiriTasksFragment() {
         // Required empty public constructor
     }
 
-    public static DailyTasksFragment newInstance(String param1, String param2) {
-        DailyTasksFragment fragment = new DailyTasksFragment();
+    public static meiriTasksFragment newInstance(String param1, String param2) {
+        meiriTasksFragment fragment = new meiriTasksFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,6 +35,8 @@ public class DailyTasksFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -35,7 +44,7 @@ public class DailyTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.daily_tasks, container, false);
+        View root = inflater.inflate(R.layout.meiri_tasks, container, false);
         return root;
     }
 }
