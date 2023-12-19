@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottom_navegation);
+        setContentView(R.layout.first_tasks);
 
         // 第一次加载，显示任务页面
         if (savedInstanceState == null) {
