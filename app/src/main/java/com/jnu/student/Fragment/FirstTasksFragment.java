@@ -17,13 +17,13 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jnu.student.R;
 
-public class ButtonTasksFragment extends Fragment {
+public class FirstTasksFragment extends Fragment {
     private String []tabHeaderStrings = {"每日任务","每周任务","普通任务","副本任务"};
-    public ButtonTasksFragment() {
+    public FirstTasksFragment() {
         // Required empty public constructor
     }
-    public static ButtonTasksFragment newInstance(String param1, String param2) {
-        ButtonTasksFragment fragment = new ButtonTasksFragment();
+    public static FirstTasksFragment newInstance(String param1, String param2) {
+        FirstTasksFragment fragment = new FirstTasksFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
