@@ -25,6 +25,12 @@
             android:name=".Activity.BottomNavegationActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.AddTasksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.addFubengActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>

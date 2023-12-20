@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 标题 -->
+
+    <!-- 得分 -->
+
+    <EditText
+        android:id="@+id/edit_Text_Title"
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        android:hint="@string/title"
+        android:inputType="text" />
+
+    <!-- 每日/每周/普通 三选一 -->
+
+    <EditText
+        android:id="@+id/edit_Text_Score"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:layout_below="@id/edit_Text_Title"
+        android:layout_marginTop="2dp"
+        android:hint="@string/score"
+        android:inputType="number" />
+
+    <RadioGroup
+        android:id="@+id/radio_Group_Frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_Text_Score"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_Button_Daily"
+            android:layout_width="145dp"
+            android:layout_height="match_parent"
+            android:text="@string/meiri" />
+
+        <RadioButton
+            android:id="@+id/radio_Button_Weekly"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:text="@string/meizhou" />
+
+        <RadioButton
+            android:id="@+id/radio_Button_Regular"
+            android:layout_width="246dp"
+            android:layout_height="wrap_content"
+            android:text="@string/putong" />
+    </RadioGroup>
+
+    <!-- 标签 -->
+
+    <!-- 确定按钮 -->
+
+    <EditText
+        android:id="@+id/edit_Text_Tags"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:layout_below="@id/radio_Group_Frequency"
+        android:layout_marginTop="5dp"
+        android:hint="@string/tags"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/button_Create_Task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_Text_Tags"
+        android:layout_marginTop="12dp"
+        android:text="@string/yes" />
+
+</RelativeLayout>

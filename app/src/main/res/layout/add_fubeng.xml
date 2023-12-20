@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<RadioGroup
+    android:id="@+id/radio_Group"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RadioButton
+        android:id="@+id/radio_chuji"
+        android:layout_width="wrap_content"
+        android:layout_height="159dp"
+        android:text="@string/chuji" />
+
+    <RadioButton
+        android:id="@+id/radio_zhongji"
+        android:layout_width="wrap_content"
+        android:layout_height="134dp"
+        android:text="@string/zhongji" />
+
+    <RadioButton
+        android:id="@+id/radio_gaoji"
+        android:layout_width="wrap_content"
+        android:layout_height="144dp"
+        android:text="@string/gaoji" />
+
+</RadioGroup>
+
+<LinearLayout
+    android:id="@+id/button_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/butto_No"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/No"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/button_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp" />
+
+</LinearLayout>
+</RelativeLayout>
