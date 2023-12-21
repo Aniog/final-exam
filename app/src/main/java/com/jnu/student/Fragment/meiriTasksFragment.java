@@ -2,7 +2,6 @@ package com.jnu.student.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,15 +34,6 @@ public class meiriTasksFragment extends Fragment {
     public meiriTasksFragment() {
         // Required empty public constructor
     }
-    public void Change_Tasks(Intent data) {
-        // Required empty public constructor
-        int score = Integer.parseInt(data.getStringExtra("score"));
-        String title = data.getStringExtra("title");
-        String tags = data.getStringExtra("tags");
-        daily_tasks.add(new Tasks(title,score));
-        tasksAdapter.notifyItemInserted(daily_tasks.size());
-        new DataDailyTasks().SaveTasks(this.getContext(),daily_tasks);
-    }
     public static meiriTasksFragment newInstance(String param1, String param2) {
         meiriTasksFragment fragment = new meiriTasksFragment();
         Bundle args = new Bundle();
@@ -64,17 +54,19 @@ public class meiriTasksFragment extends Fragment {
         // rootView 将包含 fragment_book_list.xml 中定义的视图
         View rootView = inflater.inflate(R.layout.meiri_tasks, container, false);
         // 从实例化的布局中查找具有特定 ID（R.id.recyclerview_main）的 RecyclerView
-        tasksRecyclerView = rootView.findViewById(R.id.recycle_daily);
+        tasksRecyclerView = rootView.findViewById(R.id.recycle_meiri);
         // 创建一个 LinearLayoutManager 来管理 RecyclerView 中的项目
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         // 将 LinearLayoutManager 的方向设置为垂直
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tasksRecyclerView.setLayoutManager(linearLayoutManager);
         daily_tasks = new DataDailyTasks().LoadTasks(this.getContext());
-        if(daily_tasks.size() == 0) {
-            daily_tasks.add(new Tasks("好好睡一觉", 10));
-            daily_tasks.add(new Tasks("认真看完一部电影", 10));
-            daily_tasks.add(new Tasks("出去和朋友打篮球", 10));
+        if(daily_tasks.size() == 0)
+        {
+            View root= inflater.inflate(R.layout.empty_tasks, container, false);
+            TextView textView1 = root.findViewById(R.id.empty_textView1);
+            textView1.setText("用户可自行点击右上角加号添加");
+            return root;
         }
         tasksAdapter = new TasksAdapter(daily_tasks);
         tasksRecyclerView.setAdapter(tasksAdapter);
@@ -88,12 +80,14 @@ public class meiriTasksFragment extends Fragment {
         }
         switch (item.getItemId()) {
             case 0:
+                // Do something for item 1
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this.getContext());
                 builder1.setTitle("添加提醒");
-                builder1.setMessage("请按时完成");
+                builder1.setMessage("记得添加呀");
                 builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // 处理确定按钮点击事件的逻辑
                     }
                 });
                 builder1.create().show();
@@ -101,7 +95,7 @@ public class meiriTasksFragment extends Fragment {
             case 1:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this.getContext());
                 builder2.setTitle("删除");
-                builder2.setMessage("是否确定删除?");
+                builder2.setMessage("你要删除吗?");
                 builder2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -139,8 +133,8 @@ public class meiriTasksFragment extends Fragment {
                                             ContextMenu.ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("具体操作");
 
-                menu.add(0, 0, this.getAdapterPosition(), "添加提醒" + this.getAdapterPosition());
-                menu.add(0, 1, this.getAdapterPosition(), "删除" + this.getAdapterPosition());
+                menu.add(0, 0, this.getAdapterPosition(), "添加提醒");
+                menu.add(0, 1, this.getAdapterPosition(), "删除");
             }
 
             public ViewHolder(View tasksView) {
@@ -213,5 +207,4 @@ public class meiriTasksFragment extends Fragment {
         }
         // 添加 CheckBox 的点击事件监听器
     }
-
 }

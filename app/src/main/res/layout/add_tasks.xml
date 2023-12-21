@@ -33,22 +33,28 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/add_tasks_details_Button_Daily"
-            android:layout_width="143dp"
+            android:id="@+id/add_tasks_details_Button_meiri"
+            android:layout_width="97dp"
             android:layout_height="wrap_content"
             android:text="@string/meiri" />
 
         <RadioButton
-            android:id="@+id/add_tasks_details_Button_Weekly"
-            android:layout_width="143dp"
+            android:id="@+id/add_tasks_details_Button_meizhou"
+            android:layout_width="89dp"
             android:layout_height="wrap_content"
             android:text="@string/meizhou" />
 
         <RadioButton
-            android:id="@+id/add_tasks_details_Button_Regular"
-            android:layout_width="124dp"
+            android:id="@+id/add_tasks_details_Button_putong"
+            android:layout_width="91dp"
             android:layout_height="wrap_content"
             android:text="@string/putong" />
+
+        <RadioButton
+            android:id="@+id/add_tasks_details_Button_fubeng"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fubeng" />
     </RadioGroup>
 
     <!-- 标签 -->

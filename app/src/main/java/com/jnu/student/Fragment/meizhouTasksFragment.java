@@ -1,5 +1,7 @@
 package com.jnu.student.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,20 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jnu.student.R;
+import com.jnu.student.data.DataFinishTasks;
+import com.jnu.student.data.DataWeeklyTasks;
 import com.jnu.student.data.Tasks;
 
 import java.util.ArrayList;
 
 public class meizhouTasksFragment extends Fragment {
+    public static int weekly_score = 0;
     private RecyclerView tasksRecyclerView;
     private meizhouTasksFragment.TasksAdapter tasksAdapter;
 
-    private ArrayList<Tasks> daily_tasks;
+    private ArrayList<Tasks> weekly_tasks;
     public meizhouTasksFragment() {
         // Required empty public constructor
     }
@@ -53,14 +61,65 @@ public class meizhouTasksFragment extends Fragment {
         // 将 LinearLayoutManager 的方向设置为垂直
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tasksRecyclerView.setLayoutManager(linearLayoutManager);
-        daily_tasks = new ArrayList<>();
-        daily_tasks.add(new Tasks("完整的看完一本书",20));
-        daily_tasks.add(new Tasks("成功实现Andorid开发的一项功能",30));
-        daily_tasks.add(new Tasks("和女朋友约会",15));
-        tasksAdapter = new TasksAdapter(daily_tasks);
+        weekly_tasks = new DataWeeklyTasks().LoadTasks(this.getContext());
+        if(weekly_tasks.size() == 0)
+        {
+            View root= inflater.inflate(R.layout.empty_tasks, container, false);
+            TextView textView1 = root.findViewById(R.id.empty_textView1);
+            textView1.setText("用户可自行点击右上角加号添加");
+            return root;
+        }
+        tasksAdapter = new meizhouTasksFragment.TasksAdapter(weekly_tasks);
         tasksRecyclerView.setAdapter(tasksAdapter);
         registerForContextMenu(tasksRecyclerView);
+
+
         return rootView;
+    }
+    public boolean onContextItemSelected(MenuItem item) {
+        if(item.getGroupId() != 1)
+        {
+            return false;
+        }
+        switch (item.getItemId()) {
+            case 0:
+                // Do something for item 1
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this.getContext());
+                builder1.setTitle("添加提醒");
+                builder1.setMessage("记得添加呀");
+                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 处理确定按钮点击事件的逻辑
+                    }
+                });
+                builder1.create().show();
+                break;
+            case 1:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this.getContext());
+                builder2.setTitle("删除");
+                builder2.setMessage("你要删除吗?");
+                builder2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        weekly_tasks.remove(item.getOrder());
+                        tasksAdapter.notifyItemRemoved(item.getOrder());
+                        new DataWeeklyTasks().SaveTasks(meizhouTasksFragment.this.getContext(),weekly_tasks);
+                    }
+                });
+                builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder2.create().show();
+                // Do something for item 2
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
     }
     public class TasksAdapter extends RecyclerView.Adapter<meizhouTasksFragment.TasksAdapter.ViewHolder> {
 
@@ -69,22 +128,48 @@ public class meizhouTasksFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
             private final TextView textViewTitle;
             private final TextView textViewScore;
+            private final CheckBox checkBox;
 
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
                                             ContextMenu.ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("具体操作");
 
-                menu.add(0, 0, this.getAdapterPosition(), "添加提醒" + this.getAdapterPosition());
-                menu.add(0, 1, this.getAdapterPosition(), "删除" + this.getAdapterPosition());
+                menu.add(1, 0, this.getAdapterPosition(), "添加提醒" + this.getAdapterPosition());
+                menu.add(1, 1, this.getAdapterPosition(), "删除" + this.getAdapterPosition());
             }
 
             public ViewHolder(View tasksView) {
                 super(tasksView);
                 // Define click listener for the ViewHolder's View
-
                 textViewTitle = tasksView.findViewById(R.id.text_title);
                 textViewScore = tasksView.findViewById(R.id.text_score);
+                checkBox = tasksView.findViewById(R.id.checkBox); // 初始化 CheckBox
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        // 在这里处理 CheckBox 被点击时的逻辑
+                        if (isChecked) {
+                            TextView scoreTextView = getTextViewScore();
+                            weekly_score = Integer.parseInt(scoreTextView.getText().toString());
+
+                            //添加到已完成任务
+                            ArrayList<Tasks> finish_task = new DataFinishTasks().LoadTasks(getContext());
+                            finish_task.add(new Tasks(textViewTitle.getText().toString(), weekly_score));
+                            new DataFinishTasks().SaveTasks(getContext(),finish_task);
+
+                            // CheckBox 被选中时的逻辑
+                            //Toast.makeText(getContext(), daily_score+"", Toast.LENGTH_SHORT).show();
+                            buttonView.setChecked(false);
+                            if (getActivity() != null) {
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("weeklyScore", weekly_score);
+                                getParentFragmentManager().setFragmentResult("updateScore", bundle);
+                            }
+                        } else {
+                            // CheckBox 被取消选中时的逻辑
+                        }
+                    }
+                });
                 tasksView.setOnCreateContextMenuListener(this);
             }
 
@@ -104,7 +189,7 @@ public class meizhouTasksFragment extends Fragment {
 
         // Create new views (invoked by the layout manager)
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        public meizhouTasksFragment.TasksAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             // Create a new view, which defines the UI of the list item
             View view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.tasks_show, viewGroup, false);
@@ -114,7 +199,7 @@ public class meizhouTasksFragment extends Fragment {
 
         // Replace the contents of a view (invoked by the layout manager)
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        public void onBindViewHolder(meizhouTasksFragment.TasksAdapter.ViewHolder viewHolder, final int position) {
             viewHolder.getTextViewTitle().setText(tasksArrayList.get(position).getTitle());
             viewHolder.getTextViewScore().setText(tasksArrayList.get(position).getScore()+ "");
         }

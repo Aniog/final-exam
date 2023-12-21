@@ -24,9 +24,13 @@ import com.jnu.student.data.DataScore;
 public class FirstTasksFragment extends Fragment {
     private String []tabHeaderStrings = {"每日任务","每周任务","普通任务","副本任务"};
     private static int score;
+    public int defaultTab = 0;
     public FirstTasksFragment() {
     }
-
+    public FirstTasksFragment(int i) {
+        // Required empty public constructor
+        defaultTab = i;
+    }
     public static FirstTasksFragment newInstance(String param1, String param2) {
         FirstTasksFragment fragment = new FirstTasksFragment();
         Bundle args = new Bundle();
@@ -94,6 +98,22 @@ public class FirstTasksFragment extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tabHeaderStrings[position])
         ).attach();
+        viewPager.setCurrentItem(defaultTab);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                TabLayout.Tab tab = tabLayout.getTabAt(position);
+                if (tab != null) {
+                    if (getActivity() != null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("position", position);
+                        getParentFragmentManager().setFragmentResult("tabposition", bundle);
+                    }
+                    // 在这里你可以对当前标签页进行操作
+                }
+            }
+        });
         return root;
     }
     public class FragmentAdapter extends FragmentStateAdapter {
@@ -124,5 +144,10 @@ public class FirstTasksFragment extends Fragment {
         public int getItemCount() {
             return NUM_TABS;
         }
+    }
+    private void loadTasksFragment(Fragment fragment) {
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

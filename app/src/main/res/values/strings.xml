@@ -7,10 +7,11 @@
     <string name="xz">xz</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_friend">你好，朋友</string>
-    <string name="score">奖励或者惩罚分数</string>
+    <string name="score">分数变动</string>
     <string name="meiri">每日</string>
     <string name="meizhou">每周</string>
     <string name="putong">普通</string>
+    <string name="fubeng">副本</string>
     <string name="tags">标签</string>
     <string name="yes">确定</string>
     <string name="title">任务命名</string>

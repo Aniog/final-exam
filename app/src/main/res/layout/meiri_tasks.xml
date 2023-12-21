@@ -7,7 +7,7 @@
     tools:context=".Activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_daily"
+        android:id="@+id/recycle_meiri"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
