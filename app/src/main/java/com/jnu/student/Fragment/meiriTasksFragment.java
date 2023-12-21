@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.jnu.student.R;
 import com.jnu.student.data.DataDailyTasks;
+import com.jnu.student.data.DataFinishTasks;
 import com.jnu.student.data.Tasks;
 
 import java.util.ArrayList;
@@ -71,9 +72,9 @@ public class meiriTasksFragment extends Fragment {
         tasksRecyclerView.setLayoutManager(linearLayoutManager);
         daily_tasks = new DataDailyTasks().LoadTasks(this.getContext());
         if(daily_tasks.size() == 0) {
-            daily_tasks.add(new Tasks("看书", -10));
-            daily_tasks.add(new Tasks("打代码", 10));
-            daily_tasks.add(new Tasks("锻炼", 10));
+            daily_tasks.add(new Tasks("好好睡一觉", 10));
+            daily_tasks.add(new Tasks("认真看完一部电影", 10));
+            daily_tasks.add(new Tasks("出去和朋友打篮球", 10));
         }
         tasksAdapter = new TasksAdapter(daily_tasks);
         tasksRecyclerView.setAdapter(tasksAdapter);
@@ -87,14 +88,12 @@ public class meiriTasksFragment extends Fragment {
         }
         switch (item.getItemId()) {
             case 0:
-                // Do something for item 1
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this.getContext());
                 builder1.setTitle("添加提醒");
                 builder1.setMessage("请按时完成");
                 builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 处理确定按钮点击事件的逻辑
                     }
                 });
                 builder1.create().show();
@@ -102,7 +101,7 @@ public class meiriTasksFragment extends Fragment {
             case 1:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this.getContext());
                 builder2.setTitle("删除");
-                builder2.setMessage("是否删除?");
+                builder2.setMessage("是否确定删除?");
                 builder2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -157,10 +156,19 @@ public class meiriTasksFragment extends Fragment {
                         // 在这里处理 CheckBox 被点击时的逻辑
                         if (isChecked) {
                             TextView scoreTextView = getTextViewScore();
-                            int score = Integer.parseInt(scoreTextView.getText().toString());
+                            daily_score = Integer.parseInt(scoreTextView.getText().toString());
+                            //添加到已完成任务
+                            ArrayList<Tasks> finish_task = new DataFinishTasks().LoadTasks(getContext());
+                            finish_task.add(new Tasks(textViewTitle.getText().toString(),daily_score));
+                            new DataFinishTasks().SaveTasks(getContext(),finish_task);
                             // CheckBox 被选中时的逻辑
-                            Toast.makeText(getContext(), "任务点数" + score, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), daily_score+"", Toast.LENGTH_SHORT).show();
                             buttonView.setChecked(false);
+                            if (getActivity() != null) {
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("dailyScore", daily_score);
+                                getParentFragmentManager().setFragmentResult("updateScore", bundle);
+                            }
                             // 可以执行其他操作，例如修改数据等
                         } else {
                             // CheckBox 被取消选中时的逻辑

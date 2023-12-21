@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         addTasksLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent data = result.getData();
+                    if(result.getResultCode() == Activity.RESULT_OK){Intent data = result.getData();
                         String tasks_type = data.getStringExtra("task_type");
                         if("daily".equals(tasks_type)) //每日任务
                         {
@@ -55,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
                             String tags = data.getStringExtra("tags");
                             daily_tasks.add(new Tasks(title,score));
                             new DataDailyTasks().SaveTasks(this,daily_tasks);
-                        } else if ("weekly".equals(tasks_type)) { //每周任务
+                        } else if ("weekly".equals(tasks_type)) {
                             ArrayList<Tasks> weekly_tasks = new DataWeeklyTasks().LoadTasks(this);
                             int score = Integer.parseInt(data.getStringExtra("score"));
                             String title = data.getStringExtra("title");
                             String tags = data.getStringExtra("tags");
                             weekly_tasks.add(new Tasks(title,score));
                             new DataWeeklyTasks().SaveTasks(this,weekly_tasks);
-                        } else if ("regular".equals(tasks_type)) { //普通任务
+                        } else if ("regular".equals(tasks_type)) {
                             ArrayList<Tasks> general_tasks = new DataGeneralTasks().LoadTasks(this);
                             int score = Integer.parseInt(data.getStringExtra("score"));
                             String title = data.getStringExtra("title");
