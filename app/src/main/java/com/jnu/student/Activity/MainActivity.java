@@ -15,9 +15,19 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jnu.student.Fragment.FirstTasksFragment;
+import com.jnu.student.Fragment.meiriTasksFragment;
 import com.jnu.student.R;
+import com.jnu.student.data.DataDailyTasks;
+import com.jnu.student.data.DataGeneralTasks;
+import com.jnu.student.data.DataWeeklyTasks;
+import com.jnu.student.data.Tasks;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Fragment tasksFragment = new FirstTasksFragment();
+    private Fragment statisticsFragment = new meiriTasksFragment();
     private BottomNavigationView btmNavView;
     ActivityResultLauncher<Intent> addTasksLauncher;
     ActivityResultLauncher<Intent> addDungeonLauncher;
@@ -35,7 +45,31 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if(result.getResultCode() == Activity.RESULT_OK){
-
+                        Intent data = result.getData();
+                        String tasks_type = data.getStringExtra("task_type");
+                        if("daily".equals(tasks_type)) //每日任务
+                        {
+                            ArrayList<Tasks> daily_tasks = new DataDailyTasks().LoadTasks(this);
+                            int score = Integer.parseInt(data.getStringExtra("score"));
+                            String title = data.getStringExtra("title");
+                            String tags = data.getStringExtra("tags");
+                            daily_tasks.add(new Tasks(title,score));
+                            new DataDailyTasks().SaveTasks(this,daily_tasks);
+                        } else if ("weekly".equals(tasks_type)) { //每周任务
+                            ArrayList<Tasks> weekly_tasks = new DataWeeklyTasks().LoadTasks(this);
+                            int score = Integer.parseInt(data.getStringExtra("score"));
+                            String title = data.getStringExtra("title");
+                            String tags = data.getStringExtra("tags");
+                            weekly_tasks.add(new Tasks(title,score));
+                            new DataWeeklyTasks().SaveTasks(this,weekly_tasks);
+                        } else if ("regular".equals(tasks_type)) { //普通任务
+                            ArrayList<Tasks> general_tasks = new DataGeneralTasks().LoadTasks(this);
+                            int score = Integer.parseInt(data.getStringExtra("score"));
+                            String title = data.getStringExtra("title");
+                            String tags = data.getStringExtra("tags");
+                            general_tasks.add(new Tasks(title,score));
+                            new DataGeneralTasks().SaveTasks(this,general_tasks);
+                        }
                     } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
 
                     }
@@ -116,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
                         addTasksLauncher.launch(intent1);
                         return true;
                     case "加入副本":
-                        Intent intent2 = new Intent(this, addFubengActivity.class);
+                        Intent intent2 = new Intent(this, AddFubengActivity.class);
                         addTasksLauncher.launch(intent2);
                         return true;
                     case "排序":
-                        Toast.makeText(this, "排序成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "你已经排序成功", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;

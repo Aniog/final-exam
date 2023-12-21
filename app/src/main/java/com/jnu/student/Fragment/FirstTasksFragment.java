@@ -20,7 +20,6 @@ import com.jnu.student.R;
 public class FirstTasksFragment extends Fragment {
     private String []tabHeaderStrings = {"每日任务","每周任务","普通任务","副本任务"};
     public FirstTasksFragment() {
-        // Required empty public constructor
     }
     public static FirstTasksFragment newInstance(String param1, String param2) {
         FirstTasksFragment fragment = new FirstTasksFragment();

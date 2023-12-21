@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.jnu.student.R;
 
-public class addFubengActivity extends AppCompatActivity {
+public class AddFubengActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
