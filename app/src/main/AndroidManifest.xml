@@ -28,7 +28,7 @@
             android:name=".Activity.AddTasksActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddFubengActivity"
+            android:name=".Activity.AddjiangliActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"

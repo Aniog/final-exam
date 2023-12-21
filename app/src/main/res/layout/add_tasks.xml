@@ -61,14 +61,6 @@
 
     <!-- 确定按钮 -->
 
-    <EditText
-        android:id="@+id/add_tasks_details_edit_Tags"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
-        android:layout_below="@id/add_tasks_details_Group_Frequency"
-        android:layout_marginTop="8dp"
-        android:hint="@string/tags"
-        android:inputType="text" />
 
     <Button
         android:id="@+id/add_tasks_details_ok"

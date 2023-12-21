@@ -18,7 +18,9 @@ import androidx.fragment.app.FragmentResultListener;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jnu.student.Fragment.FirstTasksFragment;
+import com.jnu.student.Fragment.jiangliFragment;
 import com.jnu.student.Fragment.meiriTasksFragment;
+import com.jnu.student.Fragment.tongjiFragment;
 import com.jnu.student.R;
 import com.jnu.student.data.DataDailyTasks;
 import com.jnu.student.data.DataFinishTasks;
@@ -31,6 +33,8 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment tasksFragment = new FirstTasksFragment();//任务
+    private Fragment tongjiFragment = new tongjiFragment();
+    private Fragment jiangliFragment = new jiangliFragment();
     private int tabposition;
     private Fragment statisticsFragment = new meiriTasksFragment();//统计
     private BottomNavigationView btmNavView;
@@ -124,11 +128,12 @@ public class MainActivity extends AppCompatActivity {
             }
             if (item.getItemId() == R.id.navigation_tongji) {
                 // 用户点击了“统计”
-                loadTasksFragment(statisticsFragment);
+                loadTasksFragment(tongjiFragment);
                 return true;
             }
             if (item.getItemId() == R.id.navigation_jiangli) {
                 // 用户点击了“奖励”，加载DailyTasksFragment
+                loadTasksFragment(jiangliFragment);
                 return true;
             }
             return false;
@@ -179,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, findViewById(R.id.btn_msg));
             // 在菜单中添加选项
             popupMenu.getMenu().add("新建任务");
-            popupMenu.getMenu().add("排序");
+            popupMenu.getMenu().add("新建奖励");
             // 设置菜单项点击事件
             popupMenu.setOnMenuItemClickListener(menuItem -> {
                 // 处理菜单项点击事件
@@ -192,7 +197,10 @@ public class MainActivity extends AppCompatActivity {
                         addTasksLauncher.launch(intent1);
 
                         return true;
-                    case "排序":
+                    case "新建奖励":
+                        Intent intent2 = new Intent(this, AddjiangliActivity.class);
+                        // 使用 addTasksLauncher 启动指定的 Intent
+                        addTasksLauncher.launch(intent2);
                         return true;
                 }
                 return false;
