@@ -10,15 +10,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-
-public class DataDailyTasks {
-    final String DATA_FILENAME = "daily_tasks.data";
-    public ArrayList<Tasks> LoadTasks(Context context) {
-        ArrayList<Tasks> data = new ArrayList<>();
+public class meizhouDataTasks {
+    final String DATA_FILENAME = "weekly_tasks.data";
+    public ArrayList<MyfirstTasks> LoadTasks(Context context) {
+        ArrayList<MyfirstTasks> data = new ArrayList<>();
         try {
             FileInputStream fileIn = context.openFileInput(DATA_FILENAME);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-            data = (ArrayList<Tasks>) objectIn.readObject();
+            data = (ArrayList<MyfirstTasks>) objectIn.readObject();
             objectIn.close();
             fileIn.close();
             Log.d("Serialization","Data loaded successfully.item count" + data.size());
@@ -28,7 +27,7 @@ public class DataDailyTasks {
         return data;
     }
 
-    public void SaveTasks(Context context, ArrayList<Tasks> tasks) {
+    public void SaveTasks(Context context, ArrayList<MyfirstTasks> tasks) {
         try{
             FileOutputStream fileOut = context.openFileOutput(DATA_FILENAME,Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);

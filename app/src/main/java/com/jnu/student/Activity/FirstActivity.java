@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jnu.student.R;
 
-public class BottomNavigationActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity {
     private BottomNavigationView btmNavView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

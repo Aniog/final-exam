@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 标题标签 -->
+    <TextView
+        android:id="@+id/add_reward_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题:"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 标题输入框 -->
+    <EditText
+        android:id="@+id/add_reward_titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入标题"
+        android:layout_toEndOf="@id/add_reward_title"
+        android:layout_alignBaseline="@id/add_reward_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- 耗费成就点数标签 -->
+    <TextView
+        android:id="@+id/reward_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="耗费成就点数:"
+        android:textSize="18sp"
+        android:layout_below="@id/add_reward_titleEditText"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 耗费成就点数输入框 -->
+    <EditText
+        android:id="@+id/reward_score_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入成就点数"
+        android:inputType="number"
+        android:layout_toEndOf="@id/reward_score_text"
+        android:layout_alignBaseline="@id/reward_score_text"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"/>
+
+
+    <Button
+        android:id="@+id/add_reward_button_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reward_score_edit_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="88dp"
+        android:text="确定" />
+
+    <Button
+        android:id="@+id/add_reward_button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_reward_button_ok"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="208dp"
+        android:text="取消" />
+
+</RelativeLayout>

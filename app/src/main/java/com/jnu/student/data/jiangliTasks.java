@@ -1,3 +1,4 @@
+
 package com.jnu.student.data;
 
 import android.content.Context;
@@ -11,32 +12,33 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
-public class DataFinishTasks {
-    final String DATA_FILENAME = "finish_tasks.data";
-    public ArrayList<Tasks> LoadTasks(Context context) {
-        ArrayList<Tasks> data = new ArrayList<>();
+public class jiangliTasks {
+    final String DATA_FILENAME = "reward.data";
+
+    public ArrayList<MyfirstTasks> LoadTasks(Context context) {
+        ArrayList<MyfirstTasks> data = new ArrayList<>();
         try {
             FileInputStream fileIn = context.openFileInput(DATA_FILENAME);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-            data = (ArrayList<Tasks>) objectIn.readObject();
+            data = (ArrayList<MyfirstTasks>) objectIn.readObject();
             objectIn.close();
             fileIn.close();
-            Log.d("Serialization","Data loaded successfully.item count" + data.size());
-        }catch (IOException | ClassNotFoundException e) {
+            Log.d("Serialization", "Data loaded successfully.item count" + data.size());
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return data;
     }
 
-    public void SaveTasks(Context context, ArrayList<Tasks> tasks) {
-        try{
-            FileOutputStream fileOut = context.openFileOutput(DATA_FILENAME,Context.MODE_PRIVATE);
+    public void SaveTasks(Context context, ArrayList<MyfirstTasks> tasks) {
+        try {
+            FileOutputStream fileOut = context.openFileOutput(DATA_FILENAME, Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(tasks);
             out.close();
             fileOut.close();
-            Log.d("Serialization","Data is serialized and saved");
-        }catch(IOException e){
+            Log.d("Serialization", "Data is serialized and saved");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

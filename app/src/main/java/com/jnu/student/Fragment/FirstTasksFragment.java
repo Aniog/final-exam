@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jnu.student.R;
-import com.jnu.student.data.DataScore;
+import com.jnu.student.data.defengData;
 
 public class FirstTasksFragment extends Fragment {
     private String []tabHeaderStrings = {"每日任务","每周任务","普通任务","副本任务"};
@@ -53,11 +53,11 @@ public class FirstTasksFragment extends Fragment {
         ViewPager2 viewPager = root.findViewById(R.id.button_view_pager);
         TabLayout tabLayout = root.findViewById(R.id.tab_layout);
         TextView textView = root.findViewById(R.id.textView);
-        score = new DataScore().loadScore(this.getContext());
+        score = new defengData().loadScore(this.getContext());
         textView.setText(String.valueOf(score));
 
         getParentFragmentManager().setFragmentResultListener("updateScore", this, (requestKey, result) -> {
-            score = new DataScore().loadScore(this.getContext());
+            score = new defengData().loadScore(this.getContext());
             int updatedScore = score;
             if (result.containsKey("dailyScore")) {
                 updatedScore += result.getInt("dailyScore");
@@ -70,9 +70,9 @@ public class FirstTasksFragment extends Fragment {
             }
             // 更新 TextView 的显示
             textView.setText(String.valueOf(updatedScore));
-            new DataScore().saveScore(this.getContext(),updatedScore);
+            new defengData().saveScore(this.getContext(),updatedScore);
             if (getActivity() != null) {
-                int all_score = new DataScore().loadScore(this.getContext());
+                int all_score = new defengData().loadScore(this.getContext());
                 Bundle bundle = new Bundle();
                 bundle.putInt("allScore", all_score);
                 getParentFragmentManager().setFragmentResult("AllScore", bundle);
@@ -87,7 +87,7 @@ public class FirstTasksFragment extends Fragment {
                 // 在此处执行按钮点击后的操作
                 Toast.makeText(getContext(), "清除", Toast.LENGTH_SHORT).show();
                 textView.setText(String.valueOf(0));
-                new DataScore().saveScore(getContext(),0);
+                new defengData().saveScore(getContext(),0);
             }
         });
         // 创建适配器

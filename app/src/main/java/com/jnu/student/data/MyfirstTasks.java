@@ -2,7 +2,7 @@ package com.jnu.student.data;
 
 import java.io.Serializable;
 
-public class Tasks implements Serializable {
+public class MyfirstTasks implements Serializable {
 
     public String getTitle() {
         return title;
@@ -14,7 +14,7 @@ public class Tasks implements Serializable {
 
     private String title;
     private int score;
-    public Tasks(String title_, int score_) {
+    public MyfirstTasks(String title_, int score_) {
         this.title = title_;
         this.score = score_;
     }

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class DataScore {
+public class defengData {
     final String DATA_FILENAME = "score.data";
     private static final String TAG = "Serialization";
 

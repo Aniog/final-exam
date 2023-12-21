@@ -18,9 +18,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jnu.student.R;
-import com.jnu.student.data.DataFinishTasks;
-import com.jnu.student.data.DataWeeklyTasks;
-import com.jnu.student.data.Tasks;
+import com.jnu.student.data.tongjiDataTasks;
+import com.jnu.student.data.meizhouDataTasks;
+import com.jnu.student.data.MyfirstTasks;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class meizhouTasksFragment extends Fragment {
     private RecyclerView tasksRecyclerView;
     private meizhouTasksFragment.TasksAdapter tasksAdapter;
 
-    private ArrayList<Tasks> weekly_tasks;
+    private ArrayList<MyfirstTasks> weekly_tasks;
     public meizhouTasksFragment() {
         // Required empty public constructor
     }
@@ -61,7 +61,7 @@ public class meizhouTasksFragment extends Fragment {
         // 将 LinearLayoutManager 的方向设置为垂直
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tasksRecyclerView.setLayoutManager(linearLayoutManager);
-        weekly_tasks = new DataWeeklyTasks().LoadTasks(this.getContext());
+        weekly_tasks = new meizhouDataTasks().LoadTasks(this.getContext());
         if(weekly_tasks.size() == 0)
         {
             View root= inflater.inflate(R.layout.empty_tasks, container, false);
@@ -83,14 +83,12 @@ public class meizhouTasksFragment extends Fragment {
         }
         switch (item.getItemId()) {
             case 0:
-                // Do something for item 1
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this.getContext());
                 builder1.setTitle("添加提醒");
-                builder1.setMessage("记得添加呀");
+                builder1.setMessage("请注意完成");
                 builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 处理确定按钮点击事件的逻辑
                     }
                 });
                 builder1.create().show();
@@ -98,13 +96,13 @@ public class meizhouTasksFragment extends Fragment {
             case 1:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this.getContext());
                 builder2.setTitle("删除");
-                builder2.setMessage("你要删除吗?");
+                builder2.setMessage("是否删除?");
                 builder2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         weekly_tasks.remove(item.getOrder());
                         tasksAdapter.notifyItemRemoved(item.getOrder());
-                        new DataWeeklyTasks().SaveTasks(meizhouTasksFragment.this.getContext(),weekly_tasks);
+                        new meizhouDataTasks().SaveTasks(meizhouTasksFragment.this.getContext(),weekly_tasks);
                     }
                 });
                 builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -114,7 +112,6 @@ public class meizhouTasksFragment extends Fragment {
                     }
                 });
                 builder2.create().show();
-                // Do something for item 2
                 break;
             default:
                 return super.onContextItemSelected(item);
@@ -123,7 +120,7 @@ public class meizhouTasksFragment extends Fragment {
     }
     public class TasksAdapter extends RecyclerView.Adapter<meizhouTasksFragment.TasksAdapter.ViewHolder> {
 
-        private ArrayList<Tasks> tasksArrayList;
+        private ArrayList<MyfirstTasks> myfirstTasksArrayList;
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
             private final TextView textViewTitle;
@@ -141,24 +138,18 @@ public class meizhouTasksFragment extends Fragment {
 
             public ViewHolder(View tasksView) {
                 super(tasksView);
-                // Define click listener for the ViewHolder's View
                 textViewTitle = tasksView.findViewById(R.id.text_title);
                 textViewScore = tasksView.findViewById(R.id.text_score);
                 checkBox = tasksView.findViewById(R.id.checkBox); // 初始化 CheckBox
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        // 在这里处理 CheckBox 被点击时的逻辑
                         if (isChecked) {
                             TextView scoreTextView = getTextViewScore();
                             weekly_score = Integer.parseInt(scoreTextView.getText().toString());
+                            ArrayList<MyfirstTasks> finish_task = new tongjiDataTasks().LoadTasks(getContext());
+                            finish_task.add(new MyfirstTasks(textViewTitle.getText().toString(), weekly_score));
+                            new tongjiDataTasks().SaveTasks(getContext(),finish_task);
 
-                            //添加到已完成任务
-                            ArrayList<Tasks> finish_task = new DataFinishTasks().LoadTasks(getContext());
-                            finish_task.add(new Tasks(textViewTitle.getText().toString(), weekly_score));
-                            new DataFinishTasks().SaveTasks(getContext(),finish_task);
-
-                            // CheckBox 被选中时的逻辑
-                            //Toast.makeText(getContext(), daily_score+"", Toast.LENGTH_SHORT).show();
                             buttonView.setChecked(false);
                             if (getActivity() != null) {
                                 Bundle bundle = new Bundle();
@@ -166,7 +157,6 @@ public class meizhouTasksFragment extends Fragment {
                                 getParentFragmentManager().setFragmentResult("updateScore", bundle);
                             }
                         } else {
-                            // CheckBox 被取消选中时的逻辑
                         }
                     }
                 });
@@ -183,31 +173,26 @@ public class meizhouTasksFragment extends Fragment {
 
         }
 
-        public TasksAdapter(ArrayList<Tasks> tasks) {
-            tasksArrayList = tasks;
+        public TasksAdapter(ArrayList<MyfirstTasks> tasks) {
+            myfirstTasksArrayList = tasks;
         }
 
-        // Create new views (invoked by the layout manager)
         @Override
         public meizhouTasksFragment.TasksAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            // Create a new view, which defines the UI of the list item
             View view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.tasks_show, viewGroup, false);
 
             return new meizhouTasksFragment.TasksAdapter.ViewHolder(view);
         }
 
-        // Replace the contents of a view (invoked by the layout manager)
         @Override
         public void onBindViewHolder(meizhouTasksFragment.TasksAdapter.ViewHolder viewHolder, final int position) {
-            viewHolder.getTextViewTitle().setText(tasksArrayList.get(position).getTitle());
-            viewHolder.getTextViewScore().setText(tasksArrayList.get(position).getScore()+ "");
+            viewHolder.getTextViewTitle().setText(myfirstTasksArrayList.get(position).getTitle());
+            viewHolder.getTextViewScore().setText(myfirstTasksArrayList.get(position).getScore()+ "");
         }
-
-        // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return tasksArrayList.size();
+            return myfirstTasksArrayList.size();
         }
     }
 }
